@@ -1,6 +1,6 @@
 import numpy as np
-from board import Board
-from stone import Stone
+from src.board import Board
+from src.stone import Stone
 
 
 class Game:
