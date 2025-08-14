@@ -1,5 +1,5 @@
 from src.stone import Stone
-from board import Board
+from src.board import Board
 import random
 
 from abc import abstractmethod, ABC
@@ -10,9 +10,19 @@ class Player(ABC):
         self.name = name
         self.color = color
 
+    def __str__(self):
+        return self.name
+
     @abstractmethod
     def move_stone(self, board: Board):
         pass
+
+    def display_stone(self, position=None):
+        if position is None:
+            print(f"{self}における場所がありませんでした。")
+
+        else:
+            print(f"{self}は{position}に置きました")
 
 
 class HumanPlayer(Player):
@@ -21,7 +31,7 @@ class HumanPlayer(Player):
         positions = board.check_all_puts()
 
         if not positions:
-
+            self.display_stone()
             return None
 
         for idx, pos in enumerate(positions):
@@ -30,7 +40,10 @@ class HumanPlayer(Player):
         while True:
             num = input("数字を選択してください: ")
             if num.isdigit() and 0 <= int(num) < len(positions):
+                self.display_stone(positions[int(num)])
+
                 return positions[int(num)]
+            print("無効な入力です。もう一度入力してください。")
 
 
 class ComputerPlayer(Player):
@@ -38,11 +51,14 @@ class ComputerPlayer(Player):
     def move_stone(self, board: Board):
         positions = board.check_all_puts()
         if not positions:
+            self.display_stone()
             return None
 
-        if board.difficulty == 1:
-            return random.choice(positions)
+        strategies = {
+            1: lambda positions: random.choice(positions),
+            2: lambda positions: max(positions, key=board.calc_score)
+        }
+        position = strategies[board.difficulty](positions)
 
-        else:
-
-            return max(positions, key=board.calc_score)
+        self.display_stone(position)
+        return position

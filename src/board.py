@@ -144,16 +144,21 @@ class Board:
         return positions
 
     def put_stone(self, position):
+        if position is None:
+            self.count += 1
+            self.turn = self.turn.opponent()
+            return
         for dr, dc in self.directions:
-            x, y = map(int, position.split('-'))
-            if self.confirm_put(x, y, dr, dc):
+            x0, y0 = map(int, position.split('-'))
+            if self.confirm_put(x0, y0, dr, dc):
+                x = x0
+                y = y0
                 self.board[x, y] = self.turn
                 while self.board[x + dr, y + dc] != self.turn:
                     x += dr
                     y += dc
                     self.board[x, y] = self.turn
-
-        self.turn = Stone.WHITE if self.turn == Stone.BLACK else Stone.BLACK
+        self.turn = self.turn.opponent()
 
     def count_stones(self):
         black = np.sum(self.board == Stone.BLACK)
@@ -335,3 +340,12 @@ class Board:
                     elif (x in range(2, 5) and y in range(2, 5)):
                         count += 1
         return count
+
+    def is_game_over(self):
+        if self.count >= 2:
+            return True
+        if not np.any(self.board == Stone.EMPTY):
+            return True
+        if not np.any(self.board == Stone.BLACK) or not np.any(self.board == Stone.WHITE):
+            return True
+        return False
