@@ -1,5 +1,6 @@
 from src.stone import Stone
 from src.board import Board
+from src.calc import Calc
 import random
 
 from abc import abstractmethod, ABC
@@ -56,7 +57,7 @@ class ComputerPlayer(Player):
 
         strategies = {
             1: lambda positions: random.choice(positions),
-            2: lambda positions: max(positions, key=board.calc_score)
+            2: lambda positions: max(positions, key=lambda pos: Calc.calc_score(pos, board))
         }
         position = strategies[board.difficulty](positions)
 

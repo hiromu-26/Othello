@@ -19,6 +19,7 @@ class Game:
 
         while (not board.is_game_over()):
             self.play_turn(players, board)
+
         board.print_board()
         board.count_stones()
 
