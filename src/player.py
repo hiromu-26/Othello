@@ -1,6 +1,7 @@
 from src.stone import Stone
 from src.board import Board
 from src.calc import Calc
+from src.othello_ai import OthelloAI
 import random
 
 from abc import abstractmethod, ABC
@@ -55,11 +56,17 @@ class ComputerPlayer(Player):
             self.display_stone()
             return None
 
-        strategies = {
-            1: lambda positions: random.choice(positions),
-            2: lambda positions: max(positions, key=lambda pos: Calc.calc_score(pos, board))
-        }
-        position = strategies[board.difficulty](positions)
+        ai = OthelloAI()  # デフォルト探索深さで初期化
+
+        if board.difficulty == 1:
+            # 難易度1はランダム
+            position = random.choice(positions)
+        else:
+            # 難易度2は MiniMax + α-β
+            position = ai.choose_move(board)
+            if position is None:
+                # 万一AIが合法手を返さない場合
+                position = random.choice(positions)
 
         self.display_stone(position)
         return position
