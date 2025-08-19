@@ -1,7 +1,7 @@
 
 from src.board import Board
 from src.stone import Stone
-from src.player import HumanPlayer, ComputerPlayer, Player
+from src.player import HumanPlayer, ComputerPlayer
 
 
 class Game:
