@@ -1,7 +1,7 @@
 import copy
-from src.stone import Stone
-from src.board import Board
-from src.calc import Calc
+from src.board.stone import Stone
+from src.board.board import Board
+from src.AI.calc import Calc
 
 
 class OthelloAI:

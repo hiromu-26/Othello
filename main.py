@@ -1,4 +1,4 @@
-from src import Game
+from src.feature import Game
 
 
 def main():

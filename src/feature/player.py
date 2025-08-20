@@ -1,7 +1,6 @@
-from src.stone import Stone
-from src.board import Board
-from src.calc import Calc
-from src.othello_ai import OthelloAI
+from src.board.stone import Stone
+from src.board.board import Board
+from src.AI.othello_ai import OthelloAI
 import random
 
 from abc import abstractmethod, ABC

@@ -1,7 +1,7 @@
 import copy
 import numpy as np
-from src.board import Board
-from src.stone import Stone
+from src.board.board import Board
+from src.board.stone import Stone
 
 
 class Calc:

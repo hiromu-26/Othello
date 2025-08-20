@@ -1,7 +1,5 @@
 import numpy as np
-import random
-import copy
-from src.stone import Stone
+from src.board.stone import Stone
 
 
 class Board:
