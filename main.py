@@ -1,4 +1,4 @@
-from src.feature import Game
+from src.othello import Game
 
 
 def main():

@@ -1,7 +1,7 @@
 
-from src.board.board import Board
-from src.board.stone import Stone
-from src.feature.player import HumanPlayer, ComputerPlayer
+from src.othello.board import Stone
+from src.othello.board import Board
+from src.othello.player import HumanPlayer, ComputerPlayer
 
 
 class Game:
